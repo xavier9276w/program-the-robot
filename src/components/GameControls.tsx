@@ -36,8 +36,9 @@ export function GameControls({ onRun, onReset, onClear, onUndoLast, canRun, isRu
         whileTap={{ scale: 0.95 }}
         onClick={onReset}
         className="bg-bg-card border border-[#3a3a5a] rounded-xl px-3 py-3.5 text-text-secondary font-medium text-sm active:bg-bg-card-hover"
+        title="Reset robot to start"
       >
-        ↩
+        🔄
       </motion.button>
 
       <motion.button
