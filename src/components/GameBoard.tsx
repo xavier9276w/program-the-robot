@@ -46,7 +46,7 @@ export function GameBoard({ level, robot, pickedUp, phase }: Props) {
 
   return (
     <div
-      className={`relative bg-grid-bg rounded-xl border border-[#2a2a4a] overflow-hidden aspect-square ${
+      className={`relative bg-grid-bg rounded-xl border border-[#2a2a4a] overflow-hidden aspect-square h-full max-w-full mx-auto ${
         isBonk ? 'animate-[bonk-shake_0.4s_ease-in-out]' : ''
       }`}
     >

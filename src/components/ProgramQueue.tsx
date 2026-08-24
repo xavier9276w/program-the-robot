@@ -35,7 +35,7 @@ export function ProgramQueue({ program, executingIndex, isRunning, onRemove, onM
         </div>
       </div>
 
-      <div className="bg-bg-card rounded-xl border border-[#2a2a4a] p-2 min-h-[48px]">
+      <div className="bg-bg-card rounded-xl border border-[#2a2a4a] p-2 min-h-[48px] max-h-[76px] overflow-y-auto">
         {program.length === 0 ? (
           <div className="text-text-secondary text-xs text-center py-2 opacity-50">
             Tap commands below to build your program

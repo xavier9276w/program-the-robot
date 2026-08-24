@@ -82,9 +82,9 @@ export function GamePage() {
   const tutorialSteps = currentLevel.tutorialSteps
 
   return (
-    <div className="min-h-dvh bg-bg-dark flex flex-col items-center">
+    <div className="h-dvh bg-bg-dark flex flex-col items-center overflow-hidden relative">
       {/* Header */}
-      <div className="w-full max-w-md px-4 pt-3 pb-2 flex items-center justify-between">
+      <div className="w-full max-w-md px-4 safe-top pb-1 flex-shrink-0 flex items-center justify-between">
         <div className="flex-1">
           <div className="text-[10px] font-bold text-primary-light uppercase tracking-widest">
             Level {currentLevel.id}
@@ -113,10 +113,12 @@ export function GamePage() {
         </div>
       </div>
 
-      {/* Settings dropdown */}
+      {/* Settings dropdown - overlay */}
       {showSettings && (
-        <div className="w-full max-w-md px-4 mb-2">
-          <div className="bg-bg-card rounded-xl border border-[#2a2a4a] p-3 space-y-2">
+        <>
+        <div className="fixed inset-0 z-20" onClick={() => setShowSettings(false)} />
+        <div className="absolute top-14 left-0 right-0 z-30 flex justify-center px-4">
+          <div className="w-full max-w-md bg-bg-card rounded-xl border border-[#2a2a4a] p-3 space-y-2 shadow-2xl">
             <div className="text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">
               Select Level
             </div>
@@ -151,10 +153,11 @@ export function GamePage() {
             </button>
           </div>
         </div>
+        </>
       )}
 
       {/* Objective */}
-      <div className="w-full max-w-md px-4 mb-2">
+      <div className="w-full max-w-md px-4 mb-1 flex-shrink-0">
         <div className="bg-bg-card border border-[#2a2a4a] rounded-lg px-3 py-2 text-center">
           <div className="text-sm font-semibold text-text-primary">
             {currentLevel.objective}
@@ -162,8 +165,8 @@ export function GamePage() {
         </div>
       </div>
 
-      {/* Game Board */}
-      <div className="w-full max-w-md px-4 mb-3">
+      {/* Game Board - flexible height */}
+      <div className="w-full max-w-md px-4 mb-1 flex-1 min-h-0 flex items-center justify-center">
         <GameBoard
           level={currentLevel}
           robot={state.robot}
@@ -174,7 +177,7 @@ export function GamePage() {
 
       {/* Concept card - inline, auto-hidden once user adds commands */}
       {currentLevel.conceptCard && state.phase === 'idle' && state.attempts === 0 && state.program.length === 0 && !state.showTutorial && (
-        <div className="w-full max-w-md px-4 mb-2">
+        <div className="w-full max-w-md px-4 mb-1 flex-shrink-0">
           <div className="bg-primary/10 border border-primary/30 rounded-xl p-2.5 text-center" onClick={dismissConcept}>
             <div className="text-[10px] font-bold text-primary-light uppercase tracking-wider mb-0.5">
               💡 {currentLevel.conceptCard.title}
@@ -186,7 +189,7 @@ export function GamePage() {
       )}
 
       {/* Program Queue */}
-      <div className="w-full max-w-md px-4 mb-2">
+      <div className="w-full max-w-md px-4 mb-1 flex-shrink-0">
         <ProgramQueue
           program={state.program}
           executingIndex={state.executingIndex}
@@ -197,12 +200,12 @@ export function GamePage() {
       </div>
 
       {/* Command Buttons */}
-      <div className="w-full max-w-md px-4 mb-2">
+      <div className="w-full max-w-md px-4 mb-1 flex-shrink-0">
         <CommandButtons onAdd={addCommand} disabled={isRunning} />
       </div>
 
       {/* Game Controls */}
-      <div className="w-full max-w-md px-4 pb-6">
+      <div className="w-full max-w-md px-4 safe-bottom flex-shrink-0">
         <GameControls
           onRun={runProgram}
           onReset={resetRobot}
